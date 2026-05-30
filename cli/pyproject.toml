@@ -16,18 +16,18 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.13"
+python = ">=3.10,<3.14"
 click = "*"
 flask = "2.3.2"
-flask-compress = "^1.13"
-flask-socketio = "5.3.4"
+flask-compress = "^1.24"
+flask-socketio = "^5.6"
 psutil = "*"
 pysocks = "*"
 requests = {extras = ["socks"], version = "*"}
 unidecode = "*"
-urllib3 = "^2.2.2"
+urllib3 = "^2.7"
 eventlet = "*"
-setuptools = ">=70.0.0"
+setuptools = "^80"
 pynacl = "*"
 colorama = "*"
 gevent-websocket = "*"
@@ -35,11 +35,12 @@ stem = "1.8.1"
 waitress = "^3.0.1"
 werkzeug = "3.0.6"
 packaging = ">=24"
-gevent = "^23.9.1"
+gevent = "^26.5.0"
 wheel = "^0.41.2"
 cffi = "^1.15.1"
 cython = "^3.0.2"
 qrcode = "^7.4.2"
+pkgconfig = "^1.6.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.2.0"
