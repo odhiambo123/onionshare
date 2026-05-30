@@ -396,63 +396,9 @@ class ReceiveModeRequest(Request):
             self.upload_error = False
             self.file_upload_rejected = False
 
-            # Figure out what files should be saved
-            now = datetime.now()
-            date_dir = now.strftime("%Y-%m-%d")
-            time_dir = now.strftime("%H%M%S%f")
-            self.receive_mode_dir = os.path.join(
-                self.web.settings.get("receive", "data_dir"), date_dir, time_dir
-            )
-
-            # Create that directory, which shouldn't exist yet
-            try:
-                os.makedirs(self.receive_mode_dir, 0o700, exist_ok=False)
-            except OSError:
-                # If this directory already exists, maybe someone else is uploading files at
-                # the same second, so use a different name in that case
-                if os.path.exists(self.receive_mode_dir):
-                    # Keep going until we find a directory name that's available
-                    i = 1
-                    while True:
-                        new_receive_mode_dir = f"{self.receive_mode_dir}-{i}"
-                        try:
-                            os.makedirs(new_receive_mode_dir, 0o700, exist_ok=False)
-                            self.receive_mode_dir = new_receive_mode_dir
-                            break
-                        except OSError:
-                            pass
-                        i += 1
-                        # Failsafe
-                        if i == 100:
-                            self.web.common.log(
-                                "ReceiveModeRequest",
-                                "__init__",
-                                "Error finding available receive mode directory",
-                            )
-                            self.upload_error = True
-                            break
-            except PermissionError:
-                self.web.add_request(
-                    self.web.REQUEST_ERROR_DATA_DIR_CANNOT_CREATE,
-                    request.path,
-                    {"receive_mode_dir": self.receive_mode_dir},
-                )
-                print(
-                    f"Could not create OnionShare data folder: {self.receive_mode_dir}"
-                )
-                self.web.common.log(
-                    "ReceiveModeRequest",
-                    "__init__",
-                    "Permission denied creating receive mode directory",
-                )
-                self.upload_error = True
-
-            # Figure out the message filename, in case there is a message
-            self.message_filename = f"{self.receive_mode_dir}-message.txt"
-
-            # If there's an error so far, finish early
-            if self.upload_error:
-                return
+            # Don't create directory yet - wait to see if there's actual content
+            self.receive_mode_dir = None
+            self.message_filename = None
 
             # A dictionary that maps filenames to the bytes uploaded so far
             self.progress = {}
@@ -486,36 +432,95 @@ class ReceiveModeRequest(Request):
                     if text_message and len(text_message) <= 524288:
                         if text_message.strip() != "":
                             self.includes_message = True
+                            # Create directory only if there's a message
+                            self._create_receive_directory()
+                            if not self.upload_error:
+                                self.message_filename = f"{self.receive_mode_dir}-message.txt"
+                                with open(self.message_filename, "w") as f:
+                                    f.write(text_message)
 
-                            with open(self.message_filename, "w") as f:
-                                f.write(text_message)
+                                self.web.common.log(
+                                    "ReceiveModeRequest",
+                                    "__init__",
+                                    f"saved message to {self.message_filename}",
+                                )
+                                print(f"Received: {self.message_filename}")
 
-                            self.web.common.log(
-                                "ReceiveModeRequest",
-                                "__init__",
-                                f"saved message to {self.message_filename}",
-                            )
-                            print(f"Received: {self.message_filename}")
+                                # Tell the GUI about the message
+                                self.tell_gui_request_started()
+                                self.web.common.log(
+                                    "ReceiveModeRequest",
+                                    "__init__",
+                                    "sending REQUEST_UPLOAD_INCLUDES_MESSAGE to GUI",
+                                )
+                                self.web.add_request(
+                                    self.web.REQUEST_UPLOAD_INCLUDES_MESSAGE,
+                                    self.path,
+                                    {
+                                        "id": self.history_id,
+                                        "filename": self.message_filename,
+                                    },
+                                )
 
-                            # Tell the GUI about the message
-                            self.tell_gui_request_started()
-                            self.web.common.log(
-                                "ReceiveModeRequest",
-                                "__init__",
-                                "sending REQUEST_UPLOAD_INCLUDES_MESSAGE to GUI",
-                            )
-                            self.web.add_request(
-                                self.web.REQUEST_UPLOAD_INCLUDES_MESSAGE,
-                                self.path,
-                                {
-                                    "id": self.history_id,
-                                    "filename": self.message_filename,
-                                },
-                            )
+    def _create_receive_directory(self):
+        """
+        Create the receive mode directory. Called only when there's actual content to save.
+        """
+        if self.receive_mode_dir is not None:
+            return  # Already created
+
+        now = datetime.now()
+        date_dir = now.strftime("%Y-%m-%d")
+        time_dir = now.strftime("%H%M%S%f")
+        self.receive_mode_dir = os.path.join(
+            self.web.settings.get("receive", "data_dir"), date_dir, time_dir
+        )
+
+        try:
+            os.makedirs(self.receive_mode_dir, 0o700, exist_ok=False)
+        except OSError:
+            if os.path.exists(self.receive_mode_dir):
+                i = 1
+                while True:
+                    new_receive_mode_dir = f"{self.receive_mode_dir}-{i}"
+                    try:
+                        os.makedirs(new_receive_mode_dir, 0o700, exist_ok=False)
+                        self.receive_mode_dir = new_receive_mode_dir
+                        break
+                    except OSError:
+                        pass
+                    i += 1
+                    if i == 100:
+                        self.web.common.log(
+                            "ReceiveModeRequest",
+                            "_create_receive_directory",
+                            "Error finding available receive mode directory",
+                        )
+                        self.upload_error = True
+                        break
+        except PermissionError:
+            self.web.add_request(
+                self.web.REQUEST_ERROR_DATA_DIR_CANNOT_CREATE,
+                request.path,
+                {"receive_mode_dir": self.receive_mode_dir},
+            )
+            print(
+                f"Could not create OnionShare data folder: {self.receive_mode_dir}"
+            )
+            self.web.common.log(
+                "ReceiveModeRequest",
+                "_create_receive_directory",
+                "Permission denied creating receive mode directory",
+            )
+            self.upload_error = True
 
     def tell_gui_request_started(self):
         # Tell the GUI about the request
         if not self.told_gui_about_request:
+            # Create directory if not already created (for file uploads)
+            if self.receive_mode_dir is None and not self.upload_error:
+                self._create_receive_directory()
+
             self.web.common.log(
                 "ReceiveModeRequest",
                 "tell_gui_request_started",
@@ -540,6 +545,10 @@ class ReceiveModeRequest(Request):
         This gets called for each file that gets uploaded, and returns an file-like
         writable stream.
         """
+        # Ignore empty file uploads (user didn't select a file)
+        if not filename or filename.strip() == "":
+            return io.BytesIO()
+
         if self.upload_request:
             # Check if file uploads are disabled - reject file streams early
             if self.web.settings.get("receive", "disable_files"):

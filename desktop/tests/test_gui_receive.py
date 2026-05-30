@@ -283,7 +283,7 @@ class TestReceive(GuiBaseTest):
 
         # Enable disable_files setting
         tab.get_mode().mode_settings_widget.toggle_advanced_button.click()
-        tab.get_mode().mode_settings_widget.disable_files_checkbox.click()
+        tab.get_mode().disable_files_checkbox.click()
 
         self.run_all_common_setup_tests()
         self.run_all_receive_mode_setup_tests(tab)
@@ -333,7 +333,7 @@ class TestReceive(GuiBaseTest):
 
         # Enable disable_files setting
         tab.get_mode().mode_settings_widget.toggle_advanced_button.click()
-        tab.get_mode().mode_settings_widget.disable_files_checkbox.click()
+        tab.get_mode().disable_files_checkbox.click()
 
         self.run_all_common_setup_tests()
         self.run_all_receive_mode_setup_tests(tab)
