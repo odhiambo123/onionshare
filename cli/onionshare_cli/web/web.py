@@ -24,7 +24,6 @@ import os
 import queue
 import requests
 import shutil
-from packaging.version import Version
 from waitress.server import create_server
 
 import flask
@@ -133,15 +132,6 @@ class Web:
             self.app.wsgi_app = ReceiveModeWSGIMiddleware(self.app.wsgi_app, self)
             # Use a custom Request class to track upload progress
             self.app.request_class = ReceiveModeRequest
-
-        # Starting in Flask 0.11, render_template_string autoescapes template variables
-        # by default. To prevent content injection through template variables in
-        # earlier versions of Flask, we force autoescaping in the Jinja2 template
-        # engine if we detect a Flask version with insecure default behavior.
-        flask_version = importlib.metadata.version("flask")
-        if Version(flask_version) < Version("0.11"):
-            # Monkey-patch in the fix from https://github.com/pallets/flask/commit/99c99c4c16b1327288fd76c44bc8635a1de452bc
-            Flask.select_jinja_autoescape = self._safe_select_jinja_autoescape
 
         self.security_headers = [
             ("X-Frame-Options", "DENY"),
