@@ -238,10 +238,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Python 3.12.8 (universal2)
+      - name: Install Python 3.12.9 (universal2)
         run: |
-          curl -L https://www.python.org/ftp/python/3.12.8/python-3.12.8-macos11.pkg --output ~/Downloads/python.pkg
-          cd ~/Downloads && echo "c411b5372d563532f5e6b589af7eb16e95613d61bd5af7bfe78563467130bbff  python.pkg" | shasum -a 256 --check && sudo installer -pkg python.pkg -target /
+          curl -L https://www.python.org/ftp/python/3.12.9/python-3.12.9-macos11.pkg --output ~/Downloads/python.pkg
+          cd ~/Downloads && echo "cca03f4d7ed77e93074d64936435d56d1f329870240cdb1ef0fd8e37cdaae8a0 python.pkg" | shasum -a 256 --check && sudo installer -pkg python.pkg -target /
 
       - name: Install poetry
         run: |
