@@ -17,13 +17,13 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+import importlib.metadata
 import logging
 import mimetypes
 import os
 import queue
 import requests
 import shutil
-from packaging.version import Version
 from waitress.server import create_server
 
 import flask
@@ -132,8 +132,6 @@ class Web:
             self.app.wsgi_app = ReceiveModeWSGIMiddleware(self.app.wsgi_app, self)
             # Use a custom Request class to track upload progress
             self.app.request_class = ReceiveModeRequest
-
-
 
         self.security_headers = [
             ("X-Frame-Options", "DENY"),
