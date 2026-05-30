@@ -109,8 +109,12 @@ class TestSymlinkProtection:
         web.website_mode.set_file_info([symlink_test_setup["site_dir"]])
 
         # Symlinks to outside should NOT be contained
-        assert not web.website_mode._is_path_contained(symlink_test_setup["symlink_path"])
-        assert not web.website_mode._is_path_contained(symlink_test_setup["nested_symlink"])
+        assert not web.website_mode._is_path_contained(
+            symlink_test_setup["symlink_path"]
+        )
+        assert not web.website_mode._is_path_contained(
+            symlink_test_setup["nested_symlink"]
+        )
 
     def test_symlink_rejected_in_website_mode_request(
         self, symlink_test_setup, common_obj
@@ -265,3 +269,43 @@ class TestSymlinkProtection:
 
         # Normal file should be in root_files
         assert "normal.txt" in web.website_mode.root_files
+
+    def test_symlink_filtered_from_directory_listing(
+        self, symlink_test_setup, common_obj
+    ):
+        """Test that symlinks are filtered from directory listings (not just file inventory)"""
+        web = Web(common_obj, False, ModeSettings(common_obj), "website")
+        web.app.testing = True
+        web.website_mode.set_file_info([symlink_test_setup["site_dir"]])
+
+        with web.app.test_client() as c:
+            # Request root directory listing
+            res = c.get("/")
+            assert res.status_code == 200
+            data = res.get_data(as_text=True)
+
+            # Symlinks should not appear in directory listing
+            assert "link.txt" not in data or "nested-link.txt" not in data
+
+            # Normal files should appear in directory listing
+            assert "normal.txt" in data
+
+    def test_nested_symlink_filtered_from_directory_listing(
+        self, symlink_test_setup, common_obj
+    ):
+        """Test that nested symlinks are filtered from nested directory listings"""
+        web = Web(common_obj, False, ModeSettings(common_obj), "website")
+        web.app.testing = True
+        web.website_mode.set_file_info([symlink_test_setup["site_dir"]])
+
+        with web.app.test_client() as c:
+            # Request nested directory listing
+            res = c.get("/nested/")
+            assert res.status_code == 200
+            data = res.get_data(as_text=True)
+
+            # Nested symlink should not appear in directory listing
+            assert "nested-link.txt" not in data
+
+            # Normal nested file should appear in directory listing
+            assert "nested.txt" in data

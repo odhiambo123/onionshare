@@ -580,10 +580,8 @@ class ZipWriter(object):
         if os.path.islink(filename):
             return
         # Verify the file is within selected roots (symlink safety check)
-        # Only check if web/share_mode is available (may be None in standalone usage)
-        if self.web and hasattr(self.web, "share_mode") and self.web.share_mode:
-            if not self.web.share_mode._is_path_contained(filename):
-                return
+        if not self.web.share_mode._is_path_contained(filename):
+            return
         self.z.write(filename, os.path.basename(filename), zipfile.ZIP_DEFLATED)
         self._size += os.path.getsize(filename)
         self.processed_size_callback(self._size)
@@ -604,10 +602,8 @@ class ZipWriter(object):
                 if os.path.islink(full_filename):
                     continue
                 # Verify the file is within selected roots
-                # Only check if web/share_mode is available (may be None in standalone usage)
-                if self.web and hasattr(self.web, "share_mode") and self.web.share_mode:
-                    if not self.web.share_mode._is_path_contained(full_filename):
-                        continue
+                if not self.web.share_mode._is_path_contained(full_filename):
+                    continue
                 arc_filename = full_filename[len(dir_to_strip) :]
                 self.z.write(full_filename, arc_filename, zipfile.ZIP_DEFLATED)
                 self._size += os.path.getsize(full_filename)

@@ -214,6 +214,10 @@ class SendBaseModeWeb:
             else:
                 this_filesystem_path = self.files[filename]
 
+            # Skip symlinks in directory listings
+            if os.path.islink(this_filesystem_path):
+                continue
+
             is_dir = os.path.isdir(this_filesystem_path)
 
             if is_dir:
