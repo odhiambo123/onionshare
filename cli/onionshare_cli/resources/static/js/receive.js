@@ -143,7 +143,8 @@ $(function () {
     // Warning shown only once data has cleared the first hop and is traversing the circuit.
     // Hidden by default; revealed in the progress handler above.
     const uploadDivEl = document.createElement("div");
-    uploadDivEl.outerHTML = `<div class="upload">
+    uploadDivEl.classList.add("upload");
+    uploadDivEl.innerHTML = `
       <div class="upload-meta">
         <input class="cancel" type="button" value="Cancel" />
         <div class="upload-filename"></div>
@@ -151,7 +152,7 @@ $(function () {
         <div class="upload-warning" style="display:none">Do not close this tab until the submission is complete.</div>
       </div>
       <progress value="0" max="100"></progress>
-    </div>`;
+    `;
 
     uploadDivEl.querySelector("div.upload-filename").textContent =
       filenames.join(", ");
