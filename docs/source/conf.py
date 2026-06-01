@@ -14,12 +14,16 @@ languages = [
     ("Deutsch", "de"),  # German
     ("Ελληνικά", "el"),  # Greek
     ("Gaeilge", "ga"),  # Irish
+    ("Italiano", "it"),  # Italian
     ("日本語", "ja"),  # Japanese
+    ("فارسی", "fa"),  # Persian
     ("Polish", "pl"),  # Polish
     ("Русский", "ru"),  # Russian
     ("Español", "es"),  # Spanish
+    ("Svenska", "sv"),  # Swedish
     ("Türkçe", "tr"),  # Turkish
     ("Українська", "uk"),  # Ukrainian
+    ("Tiếng Việt", "vi"),  # Vietnamese
 ]
 
 versions = ["2.3", "2.3.1", "2.3.2", "2.3.3", "2.4", "2.5", "2.6", "2.6.1", "2.6.2", "2.6.3", "2.6.4"]
