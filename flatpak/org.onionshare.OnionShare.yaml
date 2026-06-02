@@ -80,7 +80,7 @@ modules:
     sources:
       - type: git
         url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake.git
-        tag: v2.10.1
+        tag: v2.13.1
       - snowflake/go.mod.yml
   - name: obfs4proxy
     buildsystem: simple
