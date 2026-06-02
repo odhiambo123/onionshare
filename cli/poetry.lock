@@ -7,7 +7,6 @@ description = "Backport of compression.zstd"
 optional = false
 python-versions = "<3.14,>=3.10"
 groups = ["main"]
-markers = "python_version < \"3.14\""
 files = [
     {file = "backports_zstd-1.5.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:09045a00d9dad12dab49e029b26c197637b882cf4adc737a373404ba2aaabbca"},
     {file = "backports_zstd-1.5.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:e51edd66db6855bee020c951ca5c2e816777bfe77f87742fbbfae9a32d482fec"},
@@ -1636,5 +1635,5 @@ testing = ["coverage[toml]", "zope.event", "zope.testing"]
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.10,<3.15"
-content-hash = "24caecd66a74f1b8101bc4d9a7b0d2b5b00e1899254f74ee6c9d94e92c1b38ce"
+python-versions = ">=3.10,<3.14"
+content-hash = "8dd3865c95ec49d04be96cfacc821479ebc09512b96f15cf9a23137a1ea69ae8"

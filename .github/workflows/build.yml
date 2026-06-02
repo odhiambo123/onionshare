@@ -17,10 +17,10 @@ jobs:
       - name: Install python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.14.5"
+          python-version: "3.12.9"
 
       - name: Install poetry
-        run: C:\hostedtoolcache\windows\Python\3.14.5\x64\python -m pip install poetry
+        run: C:\hostedtoolcache\windows\Python\3.12.9\x64\python -m pip install poetry
 
       - name: Restore cache - poetry
         uses: actions/cache@v4
@@ -31,8 +31,8 @@ jobs:
       - name: Install poetry dependencies
         run: |
           cd desktop
-          C:\hostedtoolcache\windows\Python\3.14.5\x64\Scripts\poetry install
-          C:\hostedtoolcache\windows\Python\3.14.5\x64\Scripts\poetry env list --full-path
+          C:\hostedtoolcache\windows\Python\3.12.9\x64\Scripts\poetry install
+          C:\hostedtoolcache\windows\Python\3.12.9\x64\Scripts\poetry env list --full-path
 
       - name: Restore cache - tor
         uses: actions/cache@v4
@@ -41,7 +41,7 @@ jobs:
           key: ${{ runner.os }}-win64-tor-${{ hashFiles('desktop/scripts/get-tor.py') }}
 
       - name: Get tor binaries from Tor Browser (64-bit)
-        run: cd desktop && C:\hostedtoolcache\windows\Python\3.14.5\x64\Scripts\poetry run python .\scripts\get-tor.py windows-x86_64
+        run: cd desktop && C:\hostedtoolcache\windows\Python\3.12.9\x64\Scripts\poetry run python .\scripts\get-tor.py windows-x86_64
 
       - name: Install Go >=1.23.5
         uses: actions/setup-go@v5
@@ -101,13 +101,13 @@ jobs:
       - name: Build OnionShare
         run: |
           cd desktop
-          C:\hostedtoolcache\windows\Python\3.14.5\x64\Scripts\poetry run python .\setup-freeze.py build
-          C:\hostedtoolcache\windows\Python\3.14.5\x64\Scripts\poetry run python .\scripts\build-windows.py cleanup-build
+          C:\hostedtoolcache\windows\Python\3.12.9\x64\Scripts\poetry run python .\setup-freeze.py build
+          C:\hostedtoolcache\windows\Python\3.12.9\x64\Scripts\poetry run python .\scripts\build-windows.py cleanup-build
 
       - name: Compress
         shell: pwsh
         run: |
-          mv desktop\build\exe.win-amd64-3.14\ ~\onionshare-win64
+          mv desktop\build\exe.win-amd64-3.12\ ~\onionshare-win64
           Compress-Archive -LiteralPath ~\onionshare-win64 -DestinationPath ~\onionshare-win64.zip
 
       - uses: actions/upload-artifact@v4
@@ -120,10 +120,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Python 3.14.5 (universal2)
+      - name: Install Python 3.12.9 (universal2)
         run: |
-          curl -L https://www.python.org/ftp/python/3.14.5/python-3.14.5-macos11.pkg --output ~/Downloads/python.pkg
-          cd ~/Downloads && echo "b28a8dc33c456dd06c97024697d63ca916cfb494594c06fa3e4ef4d41fa82335  python.pkg" | shasum -a 256 --check && sudo installer -pkg python.pkg -target /
+          curl -L https://www.python.org/ftp/python/3.12.9/python-3.12.9-macos11.pkg --output ~/Downloads/python.pkg
+          cd ~/Downloads && echo "cca03f4d7ed77e93074d64936435d56d1f329870240cdb1ef0fd8e37cdaae8a0  python.pkg" | shasum -a 256 --check && sudo installer -pkg python.pkg -target /
 
       - name: Install poetry
         run: |
@@ -238,10 +238,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Python 3.14.5 (universal2)
+      - name: Install Python 3.12.9 (universal2)
         run: |
-          curl -L https://www.python.org/ftp/python/3.14.5/python-3.14.5-macos11.pkg --output ~/Downloads/python.pkg
-          cd ~/Downloads && echo "b28a8dc33c456dd06c97024697d63ca916cfb494594c06fa3e4ef4d41fa82335  python.pkg" | shasum -a 256 --check && sudo installer -pkg python.pkg -target /
+          curl -L https://www.python.org/ftp/python/3.12.9/python-3.12.9-macos11.pkg --output ~/Downloads/python.pkg
+          cd ~/Downloads && echo "cca03f4d7ed77e93074d64936435d56d1f329870240cdb1ef0fd8e37cdaae8a0  python.pkg" | shasum -a 256 --check && sudo installer -pkg python.pkg -target /
 
       - name: Install poetry
         run: |
