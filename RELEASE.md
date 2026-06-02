@@ -169,7 +169,7 @@ From https://snapcraft.io/onionshare/releases (you must be logged in), find the 
 Create a Windows 11 VM, and set it up like this:
 
 - Install [git for Windows](https://git-scm.com/download/win).
-- Install the latest version of 3.12 [from python.org](https://www.python.org/downloads/).
+- Install the latest version of 3.14 [from python.org](https://www.python.org/downloads/).
 - Install [Microsoft C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/), making sure to check "Desktop development with C++".
 - Download and install [7-Zip (x64)](https://7-zip.org/). Add `C:\Program Files\7-Zip` to your path.
 - Download and install [gpg4win](https://gpg4win.org/). Add `C:\Program Files (x86)\GnuPG\bin` to your path.
@@ -213,7 +213,7 @@ Set up the VM like this:
 
 - Install [Homebrew](https://brew.sh/)
 - `brew install create-dmg libiodbc`
-- Install the latest Python 3.12 from https://www.python.org/downloads/
+- Install the latest Python 3.14 from https://www.python.org/downloads/
 - Install ARM64 version of Go from https://go.dev/dl/
 - Install "Postgres.app with PostgreSQL 16 (Universal)" from https://postgresapp.com/downloads.html
 
@@ -225,16 +225,16 @@ If you've used this git repo for a previous release, clean it up:
 cd desktop
 rm -rf build dist
 # Delete the old poetry environment
-/Library/Frameworks/Python.framework/Versions/3.12/bin/poetry env remove $(poetry env list | grep "(Activated)" | cut -d" " -f1)
+/Library/Frameworks/Python.framework/Versions/3.14/bin/poetry env remove $(poetry env list | grep "(Activated)" | cut -d" " -f1)
 ```
 
 Install and build dependencies:
 
 ```sh
 cd desktop
-/Library/Frameworks/Python.framework/Versions/3.12/bin/python3 -m pip install poetry
-/Library/Frameworks/Python.framework/Versions/3.12/bin/poetry install
-/Library/Frameworks/Python.framework/Versions/3.12/bin/poetry run python ./scripts/get-tor.py macos
+/Library/Frameworks/Python.framework/Versions/3.14/bin/python3 -m pip install poetry
+/Library/Frameworks/Python.framework/Versions/3.14/bin/poetry install
+/Library/Frameworks/Python.framework/Versions/3.14/bin/poetry run python ./scripts/get-tor.py macos
 ./scripts/build-pt-obfs4proxy.sh
 ./scripts/build-pt-snowflake.sh
 ./scripts/build-pt-meek.sh
@@ -243,8 +243,8 @@ cd desktop
 Make the Apple Silicon app bundle:
 
 ```sh
-/Library/Frameworks/Python.framework/Versions/3.12/bin/poetry run python ./setup-freeze.py bdist_mac
-/Library/Frameworks/Python.framework/Versions/3.12/bin/poetry run python ./scripts/build-macos.py cleanup-build
+/Library/Frameworks/Python.framework/Versions/3.14/bin/poetry run python ./setup-freeze.py bdist_mac
+/Library/Frameworks/Python.framework/Versions/3.14/bin/poetry run python ./scripts/build-macos.py cleanup-build
 ```
 
 The Apple Silicon app bundle will be in `build` folder called `OnionShare.app`.
@@ -265,7 +265,7 @@ Next, merge these two app bundles into a single universal2 app bundle:
 
 ```sh
 
-/Library/Frameworks/Python.framework/Versions/3.12/bin/poetry run ./scripts/macos-merge-universal.py ~/tmp/intel/OnionShare.app ~/tmp/arm64/OnionShare.app ~/tmp/universal/OnionShare.app
+/Library/Frameworks/Python.framework/Versions/3.14/bin/poetry run ./scripts/macos-merge-universal.py ~/tmp/intel/OnionShare.app ~/tmp/arm64/OnionShare.app ~/tmp/universal/OnionShare.app
 ```
 
 You will need to have obtained a Developer ID Certificate from our Apple team account. The 'Development certificates' don't work for production-ready code-signing.
@@ -275,8 +275,8 @@ Only Glenn as the 'Account Holder' can request Developer ID certs, so you will n
 Finally, code sign and package the universal2 app bundle.
 
 ```sh
-/Library/Frameworks/Python.framework/Versions/3.12/bin/poetry run python ./scripts/build-macos.py codesign ~/tmp/universal/OnionShare.app
-/Library/Frameworks/Python.framework/Versions/3.12/bin/poetry run python ./scripts/build-macos.py package ~/tmp/universal/OnionShare.app
+/Library/Frameworks/Python.framework/Versions/3.14/bin/poetry run python ./scripts/build-macos.py codesign ~/tmp/universal/OnionShare.app
+/Library/Frameworks/Python.framework/Versions/3.14/bin/poetry run python ./scripts/build-macos.py package ~/tmp/universal/OnionShare.app
 ```
 
 The will create `dist/OnionShare-$VERSION.dmg` in the `desktop` directory that you're still cd'd into.
