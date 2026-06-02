@@ -376,6 +376,10 @@ div#uploads .upload .upload-warning {
   margin-top: 4px;
 }
 
+div#uploads .upload .upload-warning.hidden {
+  display: none;
+}
+
 ul.flashes {
   list-style: none;
   margin: 0;

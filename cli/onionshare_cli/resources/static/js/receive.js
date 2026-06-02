@@ -65,7 +65,7 @@ $(function () {
             staticImgPath +
             '/ajax.gif" alt="" /> ' +
             "Sending &mdash; waiting for data to traverse the Tor network &hellip;";
-          ajax.uploadDivEl.querySelector(".upload-warning").style.display = "";
+          ajax.uploadDivEl.querySelector(".upload-warning").classList.remove("hidden");
         }
       },
       false,
@@ -149,7 +149,7 @@ $(function () {
         <input class="cancel" type="button" value="Cancel" />
         <div class="upload-filename"></div>
         <div class="upload-status">Sending data to initial Tor node ...</div>
-        <div class="upload-warning" style="display:none">Do not close this tab until the submission is complete.</div>
+        <div class="upload-warning hidden">Do not close this tab until the submission is complete.</div>
       </div>
       <progress value="0" max="100"></progress>
     `;
