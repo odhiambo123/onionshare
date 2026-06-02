@@ -1461,7 +1461,7 @@ psutil = "*"
 pynacl = "^1.6.2"
 pysocks = "*"
 qrcode = "^7.4.2"
-requests = {version = "*", extras = ["socks"]}
+requests = {version = ">=2.32.3", extras = ["socks"]}
 setuptools = "^80"
 stem = "1.8.1"
 unidecode = "*"

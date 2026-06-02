@@ -23,7 +23,7 @@ flask-compress = "^1.24"
 flask-socketio = "^5.6"
 psutil = "*"
 pysocks = "*"
-requests = {extras = ["socks"], version = "*"}
+requests = {extras = ["socks"], version = ">=2.32.3"}
 unidecode = "*"
 urllib3 = "^2.7"
 eventlet = "*"
