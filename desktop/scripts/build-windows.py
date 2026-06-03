@@ -46,13 +46,13 @@ def sign(filename):
             "/d",
             "OnionShare",
             "/n",
-            "Science and Design Inc.",
+            "Lockdown Systems LLC",
             "/fd",
             "sha256",
             "/td",
             "sha256",
             "/tr",
-            "http://timestamp.digicert.com",
+            "http://ts.harica.gr",
             filename,
         ]
     )
