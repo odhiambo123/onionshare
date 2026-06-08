@@ -17,7 +17,7 @@ root = os.path.dirname(
 )
 desktop_dir = os.path.join(root, "desktop")
 
-identity_name_application = "Developer ID Application: Science & Design, Inc. (7WLJ4UBL5L)"
+identity_name_application = "Developer ID Application: Lockdown Systems LLC (G762K6CH36)"
 entitlements_plist_path = f"{desktop_dir}/package/Entitlements.plist"
 
 
