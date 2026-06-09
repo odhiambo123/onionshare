@@ -64,6 +64,9 @@ elif platform.system() == "Linux":
 
 
 build_exe_options = {
+    "includes": [
+        "backports.zstd",
+    ],
     "packages": [
         "cffi",
         "engineio",

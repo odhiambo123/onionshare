@@ -80,7 +80,7 @@ modules:
     sources:
       - type: git
         url: https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake.git
-        tag: v2.10.1
+        tag: v2.13.1
       - snowflake/go.mod.yml
   - name: obfs4proxy
     buildsystem: simple
@@ -116,8 +116,8 @@ modules:
     buildsystem: autotools
     sources:
       - type: archive
-        sha256: 371cd22178fa4b35e64b03933403890795ce3e304c5850a5b59adcc68820a799
-        url: https://dist.torproject.org/tor-0.4.8.25.tar.gz
+        sha256: bd75ba7fd68f607c7806fcf70156a300aa926e9ad69a5e56a8e6414f5227e833
+        url: https://dist.torproject.org/tor-0.4.9.9.tar.gz
     modules:
       - name: libevent
         buildsystem: autotools

@@ -75,7 +75,7 @@ class Settings(object):
             "de": "Deutsch",  # German
             "el": "Ελληνικά",  # Greek
             "is": "Íslenska",  # Icelandic
-            # "id": "Bahasa Indonesia",  # Indonesian
+            "id": "Bahasa Indonesia",  # Indonesian
             "ga": "Gaeilge",  # Irish
             "it": "Italiano",  # Italian
             "ja": "日本語",  # Japanese
