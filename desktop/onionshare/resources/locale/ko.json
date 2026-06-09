@@ -109,5 +109,9 @@
     "gui_status_indicator_receive_stopped": "중지됨",
     "gui_status_indicator_share_stopped": "중지됨",
     "gui_status_indicator_chat_stopped": "중지됨",
-    "gui_new_tab_tooltip": "새 탭 열기"
+    "gui_new_tab_tooltip": "새 탭 열기",
+    "days_first_letter": "d",
+    "hours_first_letter": "ㄷ",
+    "minutes_first_letter": "m",
+    "seconds_first_letter": "s"
 }

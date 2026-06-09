@@ -62,5 +62,9 @@
     "gui_status_indicator_chat_stopped": "נעצר",
     "gui_status_indicator_share_stopped": "נעצר",
     "gui_autoconnect_configure": "הגדרות רשת",
-    "mode_settings_advanced_toggle_show": "הצג הגדרות מתקדמות"
+    "mode_settings_advanced_toggle_show": "הצג הגדרות מתקדמות",
+    "days_first_letter": "ב",
+    "hours_first_letter": "שעה",
+    "minutes_first_letter": "דק",
+    "seconds_first_letter": "ש"
 }

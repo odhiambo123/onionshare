@@ -181,5 +181,9 @@
     "gui_url_instructions_public_mode": "Küldje el az alábbi OnionShare címet:",
     "gui_status_indicator_receive_scheduled": "Ütemezett…",
     "gui_file_info_single": "{} fájl, {}",
-    "history_in_progress_tooltip": "{} folyamatban"
+    "history_in_progress_tooltip": "{} folyamatban",
+    "days_first_letter": "k",
+    "hours_first_letter": "ó",
+    "minutes_first_letter": "p",
+    "seconds_first_letter": "mp"
 }

@@ -42,5 +42,8 @@
     "gui_status_indicator_receive_stopped": "Terhenti",
     "gui_status_indicator_share_stopped": "Terhenti",
     "gui_status_indicator_chat_stopped": "Terhenti",
-    "gui_choose_items": "Pilih"
+    "gui_choose_items": "Pilih",
+    "days_first_letter": "s",
+    "minutes_first_letter": "m",
+    "seconds_first_letter": "s"
 }

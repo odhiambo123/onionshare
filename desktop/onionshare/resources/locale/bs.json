@@ -46,5 +46,7 @@
     "gui_chat_stop_server": "Zaustavi server za chat",
     "gui_stop_server_autostop_timer_tooltip": "Tajmer automatskog zaustavljanja završava u {}",
     "gui_start_server_autostart_timer_tooltip": "Tajmer za automatsko pokretanje završava u {}",
-    "gui_receive_start_server": "Pokreni način prijema"
+    "gui_receive_start_server": "Pokreni način prijema",
+    "hours_first_letter": "h",
+    "seconds_first_letter": "s"
 }
