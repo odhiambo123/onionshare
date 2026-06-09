@@ -580,7 +580,7 @@ class ZipWriter(object):
         if os.path.islink(filename):
             return
         # Verify the file is within selected roots (symlink safety check)
-        if not self.web.share_mode._is_path_contained(filename):
+        if self.web and not self.web.share_mode._is_path_contained(filename):
             return
         self.z.write(filename, os.path.basename(filename), zipfile.ZIP_DEFLATED)
         self._size += os.path.getsize(filename)
@@ -602,7 +602,7 @@ class ZipWriter(object):
                 if os.path.islink(full_filename):
                     continue
                 # Verify the file is within selected roots
-                if not self.web.share_mode._is_path_contained(full_filename):
+                if self.web and not self.web.share_mode._is_path_contained(full_filename):
                     continue
                 arc_filename = full_filename[len(dir_to_strip) :]
                 self.z.write(full_filename, arc_filename, zipfile.ZIP_DEFLATED)
