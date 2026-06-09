@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OnionShare 2.3\n"
-"Report-Msgid-Bugs-To: onionshare-dev@lists.riseup.net\n"
-"POT-Creation-Date: 2025-02-18 17:24+1100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-01 19:58+0530\n"
 "PO-Revision-Date: 2025-06-12 19:01+0000\n"
 "Last-Translator: AO Localisation Lab "
 "<ao_localization_lab@users.noreply.hosted.weblate.org>\n"
@@ -239,8 +239,8 @@ msgstr "Lancer la ligne de commande avec Snap"
 #: ../../source/advanced.rst:92
 #, fuzzy
 msgid ""
-"If you installed OnionShare using the Snap package, you can run ``onionshare."
-"cli`` to access the command-line interface version."
+"If you installed OnionShare using the Snap package, you can run "
+"``onionshare.cli`` to access the command-line interface version."
 msgstr ""
 "Si vous installez OnionShare en utilisant le paquet Linux Snapcraft, vous "
 "pouvez vous contenter de lancer ``onionshare.cli`` pour accéder à "
@@ -852,8 +852,8 @@ msgstr ""
 
 #: ../../source/advanced.rst:430
 msgid ""
-"The 32-character onion service URL, without the scheme and without the '."
-"onion' suffix."
+"The 32-character onion service URL, without the scheme and without the "
+"'.onion' suffix."
 msgstr ""
 
 #: ../../source/advanced.rst:433
