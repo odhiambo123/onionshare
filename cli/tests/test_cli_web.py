@@ -275,6 +275,7 @@ class TestWeb:
 
         # Date folder should have just a time folder with new_york.jpg
         data_dir_date = os.path.join(data_dir, os.listdir(data_dir)[0])
+        print(data_dir_date)
         filenames = os.listdir(data_dir_date)
         assert len(filenames) == 1
         time_str = filenames[0][0:12]
@@ -305,10 +306,9 @@ class TestWeb:
             assert res.status_code == 200
             assert b"Nothing submitted" in content
 
-        # Date folder should be empty
-        data_dir_date = os.path.join(data_dir, os.listdir(data_dir)[0])
-        filenames = os.listdir(data_dir_date)
-        assert len(filenames) == 0
+        # There should be no receive date directory
+        data_dir_date = os.listdir(data_dir)
+        assert len(data_dir_date) == 0
 
         shutil.rmtree(data_dir)
 
