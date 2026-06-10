@@ -42,5 +42,8 @@
     "moat_captcha_reload": "I-restart ang laro",
     "gui_status_indicator_share_stopped": "Inihinto",
     "gui_status_indicator_receive_stopped": "Inihinto",
-    "gui_status_indicator_chat_stopped": "Inihinto"
+    "gui_status_indicator_chat_stopped": "Inihinto",
+    "hours_first_letter": "h",
+    "minutes_first_letter": "m",
+    "seconds_first_letter": "s"
 }

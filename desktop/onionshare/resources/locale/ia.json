@@ -37,5 +37,7 @@
     "gui_tab_name_share": "Compartir",
     "gui_status_indicator_chat_stopped": "Stoppate",
     "gui_status_indicator_share_stopped": "Stoppate",
-    "gui_status_indicator_receive_stopped": "Stoppate"
+    "gui_status_indicator_receive_stopped": "Stoppate",
+    "hours_first_letter": "h",
+    "seconds_first_letter": "s"
 }
